@@ -1,15 +1,36 @@
-//TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
-// click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
-public class Main {
-    public static void main(String[] args) {
-        //TIP Press <shortcut actionId="ShowIntentionActions"/> with your caret at the highlighted text
-        // to see how IntelliJ IDEA suggests fixing it.
-        System.out.printf("Hello and welcome!");
+import org.lwjgl.glfw.GLFW;
+import org.lwjgl.opengl.GL;
+import org.lwjgl.opengl.GL11;
+import org.lwjgl.opengl.GL13;
+import org.lwjgl.system.MemoryUtil;
 
-        for (int i = 1; i <= 5; i++) {
-            //TIP Press <shortcut actionId="Debug"/> to start debugging your code. We have set one <icon src="AllIcons.Debugger.Db_set_breakpoint"/> breakpoint
-            // for you, but you can always add more by pressing <shortcut actionId="ToggleLineBreakpoint"/>.
-            System.out.println("i = " + i);
+public class Main {
+    private long window;
+
+    public void run() {
+        init();
+        loop();
+        GLFW.glfwDestroyWindow(window);
+        GLFW.glfwTerminate();
+    }
+
+    private void init() {
+        GLFW.glfwInit();
+        window = GLFW.glfwCreateWindow(800, 600, "LWJGL Window", MemoryUtil.NULL, MemoryUtil.NULL);
+        GLFW.glfwMakeContextCurrent(window);
+        GL.createCapabilities();
+    }
+
+    private void loop() {
+        while (!GLFW.glfwWindowShouldClose(window)) {
+            GL11.glClear(GL11.GL_COLOR_BUFFER_BIT | GL11.GL_DEPTH_BUFFER_BIT);
+            // Rendering code here
+            GLFW.glfwSwapBuffers(window);
+            GLFW.glfwPollEvents();
         }
+    }
+
+    public static void main(String[] args) {
+        new Main().run();
     }
 }

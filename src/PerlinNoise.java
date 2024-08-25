@@ -60,7 +60,4 @@ public class PerlinNoise {
                 lerp(u, grad(permutation[ab], x, y - 1), grad(permutation[bb], x - 1, y - 1)));
         return (result + 1) / 2.0; // Normalize result to 0.0 - 1.0
     }
-
-    public static void main(String[] args) {
-    }
 }
